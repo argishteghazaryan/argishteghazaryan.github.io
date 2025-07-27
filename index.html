@@ -3,52 +3,266 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Mikhagraphy – Wedding Photography</title>
-  <meta name="description" content="Fine-art wedding photography by Mikhagraphy. Natural, elegant, timeless."/>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Mikhagraphy – Fine-Art Wedding Photography</title>
+  <meta name="description" content="Elegant, timeless wedding stories by Mikhagraphy. Light greens, soft beiges, pure emotion."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --beige:#f5f1eb;
+      --light-green:#d7e8d9;
+      --accent-green:#a9c5aa;
+      --charcoal:#2b2b2b;
+      --ease: cubic-bezier(.25,.8,.25,1);
+      --max: 1200px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(135deg,var(--beige) 0%, var(--light-green) 100%);
+      color:var(--charcoal);
+      overflow-x:hidden;
+    }
+    header{
+      position:fixed;top:0;left:0;right:0;z-index:10;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1rem 2rem;
+      background:rgba(245,241,235,.85);
+      backdrop-filter:blur(8px);
+      transition:.4s var(--ease);
+    }
+    header.scrolled{box-shadow:0 4px 14px rgba(0,0,0,.08)}
+    header h1{
+      font-family:'Playfair Display',serif;
+      font-size:1.6rem;
+      color:var(--charcoal);
+    }
+    nav a{
+      margin-left:2rem;
+      font-weight:500;
+      color:var(--charcoal);
+      text-decoration:none;
+      position:relative;
+    }
+    nav a::after{
+      content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;
+      background:var(--accent-green);transition:.3s var(--ease);
+    }
+    nav a:hover::after{width:100%}
+
+    section{min-height:100vh;padding:10vh 2rem;display:flex;align-items:center;flex-direction:column}
+    #hero{
+      position:relative;
+      width:100%;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    #hero img{
+      position:absolute;
+      top:0;left:0;
+      width:100%;height:100%;
+      object-fit:cover;
+      filter:brightness(.65);
+      animation:zoom 25s ease-in-out infinite alternate;
+    }
+    @keyframes zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+    .hero-inner{
+      position:relative;
+      text-align:center;
+      color:#fff;
+      z-index:2;
+    }
+    .hero-inner h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.2rem,5vw,3.8rem);
+      margin-bottom:1.2rem;
+      letter-spacing:.02em;
+    }
+    .hero-inner .cta{
+      display:inline-block;
+      padding:.9rem 2.2rem;
+      background:var(--accent-green);
+      color:#fff;
+      border-radius:50px;
+      font-weight:500;
+      transition:.3s var(--ease);
+      text-decoration:none;
+    }
+    .hero-inner .cta:hover{background:#8fb391;transform:translateY(-3px)}
+
+    #work{
+      background:var(--beige);
+      width:100%;
+    }
+    .section-title{
+      font-family:'Playfair Display',serif;
+      font-size:2.4rem;
+      margin-bottom:3rem;
+      opacity:0;
+      transform:translateY(40px);
+      transition:1s var(--ease);
+    }
+    .section-title.in{opacity:1;transform:none}
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+      gap:1.2rem;
+      max-width:var(--max);
+      width:100%;
+    }
+    .gallery figure{
+      position:relative;
+      overflow:hidden;
+      border-radius:12px;
+      cursor:pointer;
+      aspect-ratio:3/4;
+      opacity:0;
+      transform:translateY(30px);
+      transition:.6s var(--ease);
+    }
+    .gallery figure.in{opacity:1;transform:none}
+    .gallery img{
+      width:100%;height:100%;object-fit:cover;
+      transition:.6s var(--ease);
+    }
+    .gallery figcaption{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
+      color:#fff;
+      display:flex;
+      align-items:flex-end;
+      padding:1rem 1.2rem;
+      font-weight:500;
+      opacity:0;
+      transition:.3s var(--ease);
+    }
+    .gallery figure:hover img{transform:scale(1.05)}
+    .gallery figure:hover figcaption{opacity:1}
+
+    #about{
+      background:var(--light-green);
+      text-align:center;
+      padding:8rem 2rem;
+    }
+    #about p{
+      max-width:600px;
+      font-size:1.15rem;
+      line-height:1.8;
+    }
+
+    #contact{
+      background:var(--beige);
+      padding:6rem 2rem;
+    }
+    #contact .wrapper{
+      max-width:500px;
+      text-align:center;
+      font-size:1.1rem;
+    }
+    #contact a{
+      color:var(--accent-green);
+      font-weight:600;
+    }
+
+    footer{
+      padding:2rem;
+      text-align:center;
+      font-size:.9rem;
+      color:#777;
+      background:var(--beige);
+    }
+
+    /* reveal on scroll */
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      })
+    },{threshold:.2});
+    document.querySelectorAll('.section-title, .gallery figure').forEach(el=>io.observe(el));
+
+    /* header scroll shadow */
+    window.addEventListener('scroll',()=>{
+      document.querySelector('header').classList.toggle('scrolled',window.scrollY>40);
+    });
+
+    /* inject year */
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </style>
 </head>
-
 <body>
-  <header>
-    <h1><a href="#">Mikhagraphy</a></h1>
-    <nav>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
 
-  <section id="hero">
-    <img src="img/hero.jpg" alt="Bride & groom silhouette"/>
-    <div class="hero-text">
-      <h2>Where Every Frame Tells a Love Story</h2>
-      <a class="cta" href="#contact">Book a Consultation</a>
-    </div>
-  </section>
+<header>
+  <h1>Mikhagraphy</h1>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <section id="work">
-    <h2 class="section-title">Recent Weddings</h2>
-    <div id="gallery" class="gallery"></div>
-  </section>
+<section id="hero">
+  <img src="img/hero.jpg" alt="Couple kissing at sunset">
+  <div class="hero-inner">
+    <h2>Where Light, Love & Beige Moments Meet</h2>
+    <a class="cta" href="#contact">Start Your Story</a>
+  </div>
+</section>
 
-  <section id="about">
-    <h2 class="section-title">About Mikhagraphy</h2>
-    <p>Hi, I’m Mika. I craft honest, cinematic imagery that preserves the fleeting, beautiful chaos of your wedding day. Based in Vancouver, available worldwide.</p>
-  </section>
+<section id="work">
+  <h2 class="section-title">Latest Weddings</h2>
+  <div class="gallery">
+    <!-- Repeat <figure> for each photo -->
+    <figure>
+      <img src="img/w1_1.jpg" alt="Emma & David">
+      <figcaption>Emma & David – Whistler</figcaption>
+    </figure>
+    <figure>
+      <img src="img/w2_1.jpg" alt="Sofia & Luis">
+      <figcaption>Sofia & Luis – Vancouver Island</figcaption>
+    </figure>
+    <figure>
+      <img src="img/w3_1.jpg" alt="Aria & Jamal">
+      <figcaption>Aria & Jamal – Tofino Beach</figcaption>
+    </figure>
+    <figure>
+      <img src="img/w4_1.jpg" alt="Clara & Noah">
+      <figcaption>Clara & Noah – Urban Loft</figcaption>
+    </figure>
+    <!-- Add more figures as needed -->
+  </div>
+</section>
 
-  <section id="contact">
-    <h2 class="section-title">Let’s Create Together</h2>
-    <p>Email: <a href="mailto:hello@mikhagraphy.com">hello@mikhagraphy.com</a></p>
-    <p>Instagram: <a href="https://instagram.com/mikhagraphy" target="_blank" rel="noopener">@mikhagraphy</a></p>
-  </section>
+<section id="about">
+  <h2 class="section-title">About Mikhagraphy</h2>
+  <p>
+    I’m Mika, a fine-art wedding photographer who paints with soft greens and warm beiges.  
+    My images breathe the quiet in-between moments, the wind in the veil, the stolen glances.  
+    Based in Vancouver, passport always ready.
+  </p>
+</section>
 
-  <footer>
-    <small>© <span id="year"></span> Mikhagraphy</small>
-  </footer>
+<section id="contact">
+  <div class="wrapper">
+    <h2 class="section-title">Let’s Create Magic</h2>
+    <p>
+      Email me at <a href="mailto:hello@mikhagraphy.com">hello@mikhagraphy.com</a><br>
+      or find me on <a href="https://instagram.com/mikhagraphy" target="_blank" rel="noopener">Instagram @mikhagraphy</a>
+    </p>
+  </div>
+</section>
 
-  <script src="app.js"></script>
+<footer>
+  <small>© <span id="year"></span> Mikhagraphy. Crafted with light.</small>
+</footer>
+
 </body>
 </html>
