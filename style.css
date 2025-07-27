@@ -1,0 +1,100 @@
+:root {
+  --bg: #fdfcfb;
+  --text: #222;
+  --accent: #bfa78a;
+  --max-width: 1200px;
+  --gap: 1.2rem;
+  font-size: 16px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem var(--gap);
+  max-width: var(--max-width);
+  margin: auto;
+}
+header h1 a {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--text);
+  text-decoration: none;
+}
+nav a {
+  margin-left: 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+#hero {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+}
+#hero img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hero-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.hero-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 1.2rem;
+}
+.cta {
+  background: var(--accent);
+  padding: .8rem 1.6rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 3px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin: 3rem var(--gap) 1.5rem;
+  text-align: center;
+}
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap);
+  padding: 0 var(--gap);
+  max-width: var(--max-width);
+  margin: auto;
+}
+.gallery img {
+  width: 100%; height: auto; object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform .3s;
+}
+.gallery img:hover { transform: scale(1.03); }
+#about, #contact {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 0 var(--gap);
+  text-align: center;
+}
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: .875rem;
+  color: #777;
+}
+@media (max-width: 600px) {
+  nav a { margin-left: .8rem; font-size: .9rem; }
+}
